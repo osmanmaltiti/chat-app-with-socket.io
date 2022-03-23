@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import {io} from 'socket.io-client';
-import Protected from '../component/protected-route';
 
 const App = () => {
   const [socket, setSocket] = useState();
-  const [input, setInput] = useState();
-  const [user, setUser] = useState();
-  const [chat, setChat] = useState([]);
+  const [name, setName] = useState('');
+  const [id, setId] = useState('');
+  
   useEffect(() => {
-    const currentUser = localStorage.getItem('currentUser');
     const connect = io('http://localhost:5000');
-    setUser(JSON.parse(currentUser));
     setSocket(connect);
   },[]);
 
@@ -19,44 +16,33 @@ const App = () => {
       console.log(socket.id)
     });
 
-    socket.on("recieved message", (value) => {
-      setChat([...chat, value])
+    socket.on("feedback", (value) => {
+      console.log(value)
+    });
+
+    socket.on("game", (game) => {
+      console.log(game)
     });
   }
 
-  const SendChat = () => {
-    const new_chat = {
-      id: user.id,
-      name: user.name,
-      message: input
-    }
-    socket.emit("chat message", new_chat);
+  const createRoom = () => {
+    socket.emit("create-room", {room: id});
+  }
+
+  const joinRoom = () => {
+    socket.emit("join-room", {room: id}, message => {
+      console.log(message)
+    });
   }
 
   return (
-    <div className='main-home'>
-      <div className='chat-area'>
-        {
-          chat
-            .map(item => <div className='texts'>
-                          
-                          { item.id === user.id ? 
-                              <h3 className='user-message'>{item.name}</h3>:
-                              <h3>{item.name}</h3>
-                          }
-                          { item.id === user.id ? 
-                              <p className='user-message'>{item.message}</p>:
-                              <p>{item.message}</p>
-                          }
-                        </div>)
-        }
-      </div>
-      <div className='text-area'>
-        <input value={input} className='input' onChange={(e) => setInput(e.target.value)}/>
-        <button className='send-button' onClick={() => SendChat()}>Send</button>
-      </div>
+    <div className='form'>
+      <input value={name} className='input' onChange={(e) => setName(e.target.value)} placeholder='User Name'/>
+      <input value={id} className='input' onChange={(e) => setId(e.target.value)} placeholder='Room Id'/>
+      <button className='btn' onClick={() => createRoom()}>Create Room</button>
+      <button className='btn' onClick={() => joinRoom()}>Join Room</button>
     </div>
   )
 }
 
-export default Protected(App);
+export default App;

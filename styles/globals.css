@@ -24,72 +24,18 @@ a {
   padding: 1rem;
 }
 
-.chat-area{
-  flex-grow: 1;
-  border-radius: 1rem;
-  border: 2px solid black;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  padding: 1rem;
-}
-
-.text-area{
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  gap: .5rem;
-  height: 3rem;
-}
 
 .input{
   height: 100%;
   flex-grow: 1;
-  border-radius: .5rem;
-  font-size: 1.5rem;
+  border-radius: .2rem;
+  font-size: 1rem;
 }
 .input:focus{
   outline: none
 }
 
-.send-button{
-  border: none;
-  background-color: black;
-  color: white;
-  padding: 0 2rem;
-  border-radius: .5rem;
-  font-size: 1.3rem;
-}
-
-.texts{
-  display: flex;
-  flex-direction: column;
-  gap: .2rem;
-}
-
-h3{
-  margin: 0;
-  width: fit-content;
-  border-radius: 3px;
-}
-
-p{
-  margin: 0;
-  background-color: rgb(84, 226, 207);
-  padding: .5rem;
-  width: fit-content;
-  border-radius: 0 6px 6px 6px;
-}
-
-.main-sign{
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-}
-
-.main-sign .form{
+.form{
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -97,12 +43,8 @@ p{
   padding: 2rem;
 }
 
-.main-sign .form h2{
-  width: 80%;
-  margin-left: 9.5%;
-}
 
-.main-sign .form button{
+.btn{
   width: fit-content;
   margin: 0 auto;
   height: 2rem;
@@ -113,26 +55,14 @@ p{
   border: 2px solid black;
   border-radius: 4px;
 }
-.main-sign .form button:hover{
+.btn:hover{
   cursor: pointer;
   background-color: white;
   color: black;
 }
 
-.main-sign .form .input-label{
-  width: 80%;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: .5rem;
-}
 
-.main-sign .form .input-label .label{
-  background-color: transparent;
-  padding: 0;
-}
-
-.main-sign .form .input-label input{
+.input{
   height: 2rem;
   width: 100%;
 }
